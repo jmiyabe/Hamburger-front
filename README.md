@@ -1,71 +1,52 @@
-# Getting Started with Create React App
+# Hamburger-App
+This repository contains the front end of Hamburger-App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Objetivos
 
-## Available Scripts
+Criar uma aplicação web para gerir a venda de lanches, de modo que alguns lanches são opções de cardápio e outros podem conter ingredientes personalizados.
+ 
+A seguir, apresentamos a lista de ingredientes disponíveis:
 
-In the project directory, you can run:
+| Ingredientes               | Valor     |
+|:---------------------------| :-------- |
+| Alface                     | R$ 0,40   |
+| Bacon                      | R$ 2,00   |
+| Hambúrguer de carne        | R$ 3,00   |
+| Ovo                        | R$ 0,80   |
+| Queijo                     | R$ 1,50   |
 
-### `yarn start`
+Segue as opções de cardápio e seus respectivos ingredientes:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+| Lanche                     | Ingredientes                             |
+|:---------------------------| :--------------------------------------- |
+| X-Bacon                    | Bacon, hambúrguer de carne e queijo      |
+| X-Burger                   | Hambúrguer de carne e queijo             |
+| X-Egg                      | Ovo, hambúrguer de carne e queijo        |
+| X-Egg Bacon                | Ovo, bacon, hambúrguer de carne e queijo |
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+O valor de cada opção do cardápio é dado pela soma dos ingredientes que compõem o lanche. Além destas opções, o cliente pode personalizar seu lanche e escolher os ingredientes que desejar. Nesse caso, o preço do lanche também será calculado pela soma dos ingredientes.
+ 
+Existe uma exceção à regra para o cálculo de preço, quando o lanche pertencer à uma promoção. A seguir, apresentamos a lista de promoções e suas respectivas regras de negócio:
 
-### `yarn test`
+| Promoção        | Regra de negócio                                                                                                            |
+|:----------------| :-------------------------------------------------------------------------------------------------------------------------- |
+| Light           | Se o lanche tem alface e não tem bacon, ganha 10% de desconto.                                                              |
+| Muita carne     | A cada 3 porções de carne o cliente só paga 2. Se o lanche tiver 6 porções, ocliente pagará 4. Assim por diante...          |
+| Muito queijo    | A cada 3 porções de queijo o cliente só paga 2. Se o lanche tiver 6 porções, ocliente pagará 4. Assim por diante...         |
+| Inflação        | Os valores dos ingredientes são alterados com frequência e não gastaríamos que isso influenciasse nos testes automatizados. |
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+# Especificações do desenvolvimento.
+ - Desenvolvido utilizando Javascript, CSS com o React.js
+ - Desenvolido separando os componentes com suas devidas resposabilidades.
+ - Testes automatizados criados com o cypress.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# Hamburger-front
+# Como rodar o projeto
+ - Fazer a cópia do projeto.
+ - Acessar a pasta client-burger
+ - Rodar o comando 'yarn install ou npm install' para baixar todas as dependências do projeto.
+ - Em seguida iniciar o projeto com o comando 'yarn run start ou npm run start'
+ - O App vai estar disponível no localhost:3000
+ - Para rodar o testes do cypress, iniciar o cypress com o comando yarn run cypress. Com ele aberto acessar a pasta integration e clicar no teste automated-tests.js
+  
