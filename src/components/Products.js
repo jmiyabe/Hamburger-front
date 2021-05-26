@@ -3,7 +3,9 @@ import formatCurrency from '../utils';
 import Modal from 'react-modal';
 import { calculateByFormula } from '../calculateProductPrice';
 import PropTypes from 'prop-types';
-
+import { connect } from 'react-redux';
+import { fetchProducts } from '../actions/productActions';
+import { addToCart } from '../actions/cartActions';
 const Products = (props) => {
 
   const [ingredients, setIngredients] = useState([]);
@@ -11,11 +13,12 @@ const Products = (props) => {
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
+    props.fetchProducts();
     getIngredients();
   },[])
 
   const getIngredients = () => {
-    fetch('http://localhost:8080/api/ingredients')
+    fetch('/api/ingredients')
       .then((res) => res.json())
       .then((data) => {
         setIngredients(data)
@@ -57,8 +60,10 @@ const Products = (props) => {
 
   return(
     <div>
-      <ul className="products">
-        {props.products.map((prod) => {
+      {!props.products ? 
+        <div>Loading...</div>
+      : <ul className="products">
+        { props.products.map((prod) => {
           return(
             <li key={prod.id}>
               <div className="product">
@@ -71,7 +76,7 @@ const Products = (props) => {
             </li>
           )
         })}
-      </ul>
+      </ul>}
       {product && (
         <Modal
           isOpen={product !== null}
@@ -135,4 +140,4 @@ Products.propTypes = {
   addToCart: PropTypes.func.isRequired,
 }
 
-export default Products;
+export default connect((state)=> ({products: state.products.items }), { fetchProducts, addToCart, })(Products);

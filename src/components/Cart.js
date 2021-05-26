@@ -3,6 +3,9 @@ import {calculateProductPrice,calculateByFormula} from '../calculateProductPrice
 import formatCurrency from '../utils';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { removeFromCart, clearCart } from '../actions/cartActions';
+
 
 const Cart = (props) => {
   const {cartItems} = props;
@@ -18,6 +21,9 @@ const Cart = (props) => {
   }
 
   return(
+    !cartItems ? <div>
+      Loading...
+    </div> : 
     <div>
       {cartItems.length === 0 ? 
       <div className='cart cart-header'>
@@ -53,7 +59,7 @@ const Cart = (props) => {
               Total:{" "}
               {formatCurrency(getTotalPrice())}
             </div>
-            <button onClick={() => {createOrder(); setIsOpen(true); props.clearCart()}} type='submit' className='button primary'>Buy</button>
+            <button onClick={() => {createOrder(); setIsOpen(true)}} type='submit' className='button primary'>Buy</button>
           </div>
         </div>
       )}
@@ -62,7 +68,7 @@ const Cart = (props) => {
           isOpen={isOpen}
           ariaHideApp={false}
           >
-          <button onClick={() => {setIsOpen(false)}} className='button primary close-modal'>X</button>
+          <button onClick={() => {setIsOpen(false); props.clearCart()}} className='button primary close-modal'>X</button>
           <div className='modal-order'>
             <div className='modal-complete'>
               You have completed the order
@@ -73,8 +79,6 @@ const Cart = (props) => {
           </div>
         </Modal>
       )}
-      
-      
     </div>
   )
 }
@@ -86,4 +90,4 @@ Cart.propTypes = {
   order: PropTypes.any
 }
 
-export default Cart;
+export default connect((state) => ({cartItems: state.cart.cartItems}), { removeFromCart, clearCart })(Cart);
